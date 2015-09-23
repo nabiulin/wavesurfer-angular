@@ -1,119 +1,135 @@
-.wave-control-wrap {
-    background-color: transparent;
-    padding: 1% 3%;
+
+.record-waveform {
+    padding: 25px 2%;
+    background-color: #f5f2f6;
+    margin: 0 15px;
+    color: #5d595e;
+    font-size: 14px;
+    white-space: nowrap;
 }
-.wave-control-wrap button{
-	background: transparent;
-	border: 0;
+
+.record-waveform-volume,
+.record-waveform-control,
+.record-waveform-wave,
+.record-waveform-download {
+    padding: 5px 10px;
 }
-.sound-duration {
-    padding-top: 10px;
+
+.record-waveform-control {
+    cursor: pointer;
+    width: 50px;
+    float: left;
+}
+
+.record-waveform-control .fa {
+    color: #5d595e;
+}
+
+.record-waveform-control span {
     display: inline-block;
+    vertical-align: middle;
     font-size: 13px;
-    margin: 13px 0 0 14px;
-    width: 100px;
+    margin: 0 5px;
 }
-.wave-control-wrap button img{
-	width: 83%;
-	/*padding: 8px 6px;*/
+
+.record-waveform-control.disabled .fa {
+    color: #d5d1d6;
 }
-.waveform {
-    width: 76%;
+
+.record-waveform-control .fa-play {
+    font-size: 20px;
+}
+
+.record-waveform-wave {
+    vertical-align: middle;
+    overflow: hidden;
+    padding: 0 10px;
+}
+
+.record-waveform-wave .time-total,
+.record-waveform-wave .time-left {
+    display: block;
     float: left;
-    display: inline-block;
-    margin-left: 0px;
-    margin-top: 5px;
+    vertical-align: middle;
+    margin: 0 10px;
+    font-size: 13px;
+    width: 40px;
+    padding: 5px 0;
 }
-.playrate-ddl{
-	border-radius: 3px;
-	padding: 3px;
-	background-color: #454c52;
-	float: right;
-	margin-top: 11px;
-	margin-left: 0px;
-	position: relative;
-}
-button {
-	outline: none;
-}
-.play-btn {
-    background-image: url('../img/play-icon.png') !important;
-    width: 64px;
-    height: 64px;
-    display: inline-block;
-    float: left;
-}
-.pause-btn {
-	background-image: url('../img/pause-icon.png') !important;
-    width: 64px;
-	height: 64px;
-	display: inline-block;
-	float: left;
-}
-.ff-btn {
-	background-image: url('../img/fastforward24.png') !important;
-    width: 24px;
-	height: 24px;
-	display: inline-block;
-	float: left;
-    margin-top: 20px;
-}
-.bw-btn {
-	background-image: url('../img/backward24.png') !important;
-    width: 24px;
-	height: 24px;
-	display: inline-block;
-	float: left;
-    margin-top: 20px;
-}
-/*volume slider style*/
-.volume-100 {
-    width: 134px;
-    height: 24px;
-    position: relative;
-    background: url('../img/volume100.png') no-repeat left top;
+
+.record-waveform-wave .time-left {
     float: right;
-    margin: 20px 30px 0 10px;
-    display: inline-table;
 }
-.volume-50 {
-    width: 134px;
-    height: 24px;
+
+.record-waveform-wave .audio {
+    vertical-align: middle;
+    height: 30px;
+    overflow: hidden;
+}
+
+.record-waveform-volume {
     position: relative;
-    background: url('../img/volume50.png') no-repeat left top;
+    width: 30px;
+    text-align: center;
     float: right;
-    margin: 20px 30px 0 10px;
-    display: inline-table;
+    padding: 5px 0;
 }
-.volume-0 {
-    width: 134px;
-    height: 24px;
-    position: relative;
-    background: url('../img/volume0.png') no-repeat left top;
-    float: right;
-    margin: 20px 30px 0 10px;
-    display: inline-table;
-}
-.audio-volume {
+
+.record-waveform-volume .volume-control {
+    border-radius: 3px;
+    background-color: #5d585e;
+    padding: 10px;
     position: absolute;
-    left: 32px;
-    margin: 4px auto;
-    height: 24px;
-    background: url('../img/volume-empty.png') no-repeat left top;
+    z-index: 5;
+    top: -110px;
+    left: 50%;
+    display: none;
+    margin-left: -13px;
 }
-.audio-volume .ui-slider-range-min {
-    height: 15px;
-	width: 320px;
-	position: absolute;
-	background: url('../img/volume-full.png') no-repeat left top;
+
+.record-waveform-volume.active {
+    display: block;
 }
-.audio-volume .ui-slider-handle {
-    width: 21px;
-	height: 18px;
-	background: url('../img/volume-knob.png') no-repeat left top;
-	position: absolute;
-	margin-left: -8px;
-	margin-top: -2px;
-	cursor: pointer;
-	outline: none;
+
+.record-waveform-volume:after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 5px 0 5px;
+    border-color: #5d585e transparent transparent transparent;
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    margin-left: -5px;
+    display: block;
+    content: "";
+}
+
+.record-waveform-volume .slider {
+    width: 6px;
+    height: 80px;
+    border-radius: 2px;
+    background-color: #cfdae2;
+    position: relative;
+}
+
+.record-waveform-volume .slider-active,
+.record-waveform-volume .ui-slider-range {
+    background-color: #899eae;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.record-waveform-volume .pin,
+.record-waveform-volume .ui-slider-handle {
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    left: -7px;
+    margin-bottom: -10px;
+    width: 20px;
+    height: 20px;
+    z-index: 5;
 }

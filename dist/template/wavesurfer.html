@@ -1,0 +1,22 @@
+<div class="record-waveform" id="{{::uniqueId}}">
+    <div class="record-waveform-control">
+        <span ng-click="load()">
+            <i class="fa" ng-class="{'fa-spinner fa-spin': isLoading, 'fa-play' : !isPlaying, 'fa-pause': isPlaying}"></i>
+        </span>
+    </div>
+    <div class="record-waveform-volume">
+        <i class="fa fa-volume-up" ng-click="isVolumeActive = !isVolumeActive"></i>
+        <div class="volume-control" ng-class="{active: isVolumeActive}">
+            <div ui-slider="{orientation: 'vertical', range: 'min'}" class="slider"
+                 min="0"
+                 max="100"
+                 step="1"
+                 ng-model="volumeLevel"></div>
+        </div>
+    </div>
+    <div class="record-waveform-wave">
+        <div class="time-total">{{progress | hms}}</div>
+        <div class="time-left">-{{remaining | hms}}</div>
+        <div class="audio"></div>
+    </div>
+</div>
