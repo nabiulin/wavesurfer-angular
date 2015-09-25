@@ -9,19 +9,44 @@
         <title>Wavesurfer Directive Example</title>
         <!-- css files -->
         <link rel="stylesheet" type="text/css" href="../dist/css/wavesurfer.angular.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
         <!-- js files -->
         <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="../bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="../bower_components/angular/angular.min.js"></script>
         <script type="text/javascript" src="../bower_components/wavesurfer.js/dist/wavesurfer.min.js"></script>
+        <script type="text/javascript" src="../bower_components/angular-ui-slider/src/slider.js"></script>
         <script type="text/javascript" src="../dist/js/wavesurfer-angular.js"></script>
         
         <script type="text/javascript" src="./app.js"></script>
+        <style>
+            body {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 15px;
+            }
+            .waveform-wrapper {
+                margin-top: 20px;
+            }
+            .page-wrapper {
+                margin-top: 150px;
+            }
+        </style>
     </head>
     <body>
-        <div ng-controller="wavesurferController">
-            <!--<wavesurfer url="url" options="options"></wavesurfer>-->
+        <div ng-controller="wavesurferController" class="page-wrapper">
+            <div class="waveform-wrapper">
+                <wavesurfer url="url" options="options"></wavesurfer>
+            </div>
+            <div class="waveform-wrapper">
+                <wavesurfer url="url" options="options"></wavesurfer>
+            </div>
+            <div class="waveform-wrapper">
+                <wavesurfer url="url" options="options"></wavesurfer>
+            </div>
+            <div class="waveform-wrapper">
+                <wavesurfer url="url" options="options"></wavesurfer>
+            </div>
         </div>
     </body>
 </html>
