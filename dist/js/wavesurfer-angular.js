@@ -1,7 +1,7 @@
 (function (angular, WaveSurfer) {
     'use strict';
 
-    var module = angular.module('wavesurfer.angular', []);
+    var module = angular.module('wavesurfer.angular', ['ui.slider']);
 
     function wavesurferDirective($rootScope, $timeout) {
         var uuid = 1;
@@ -19,16 +19,19 @@
                     length = 0,
                     defaultOptions = {
                         hideScrollbar: true,
-                        height: 30,
-                        waveColor: "#d5d1d6",
-                        progressColor: "#736d74",
+                        height: 50,
+                        waveColor: "#337ab7",
+                        normalize: true,
+                        progressColor: "#23527c",
                         container: waveformContainer
                     };
 
                 var options = angular.extend(defaultOptions, scope.options);
 
+                waveformContainer.style.height = options.height + 'px';
+
                 scope.isVolumeActive = false;
-                scope.volume = 50;
+                scope.volumeLevel = 50;
                 scope.isPlaying = false;
                 scope.isLoading = false;
                 scope.uniqueId = 'waveform_' + (uuid++);
@@ -37,6 +40,8 @@
 
                 var ready = function () {
                     length = Math.floor(scope.wavesurfer.getDuration());
+
+                    scope.$emit('wavesurfer:stopAll');
 
                     $timeout(function () {
                         scope.remaining = length;
@@ -77,12 +82,16 @@
                         scope.isLoading = true;
                         init(scope.peaks);
                     } else {
+                        if (!scope.wavesurfer.isPlaying()) {
+                            scope.$emit('wavesurfer:stopAll');
+                        }
                         scope.playPause();
                     }
                 };
 
                 scope.playPause = function () {
                     scope.isPlaying = !scope.isPlaying;
+                    scope.isVolumeActive = false;
                     scope.wavesurfer.playPause();
                 };
 
@@ -91,9 +100,14 @@
                     scope.isPlaying = false;
                 };
 
+                scope.stop = function () {
+                    scope.wavesurfer.stop();
+                    scope.isPlaying = false;
+                };
+
                 $rootScope.$on('wavesurfer:stopAll', function () {
                     if (angular.isDefined(scope.wavesurfer)) {
-                        scope.pause();
+                        scope.stop();
                     }
                 });
             }
@@ -101,7 +115,24 @@
     }
 
     function hmsFilter() {
-        return '';
+        return function (str) {
+            var secNum = parseInt(str, 10),
+                hours = Math.floor(secNum / 3600),
+                minutes = Math.floor((secNum - (hours * 3600)) / 60),
+                seconds = secNum - (hours * 3600) - (minutes * 60);
+
+            if (hours < 10) {
+                hours = '0' + hours;
+            }
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+
+            return minutes + ':' + seconds;
+        };
     }
 
     module
