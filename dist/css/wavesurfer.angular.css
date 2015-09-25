@@ -1,83 +1,69 @@
 
-.record-waveform {
+.waveform {
     padding: 25px 2%;
-    background-color: #f5f2f6;
     margin: 0 15px;
-    color: #5d595e;
     font-size: 14px;
     white-space: nowrap;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.record-waveform-volume,
-.record-waveform-control,
-.record-waveform-wave,
-.record-waveform-download {
-    padding: 5px 10px;
+.waveform i {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 5px;
 }
 
-.record-waveform-control {
+.waveform-volume,
+.waveform-control,
+.waveform-wavesurfer {
+    padding: 15px 10px;
+}
+
+.waveform-control {
     cursor: pointer;
     width: 50px;
     float: left;
 }
 
-.record-waveform-control .fa {
-    color: #5d595e;
-}
-
-.record-waveform-control span {
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 13px;
-    margin: 0 5px;
-}
-
-.record-waveform-control.disabled .fa {
-    color: #d5d1d6;
-}
-
-.record-waveform-control .fa-play {
-    font-size: 20px;
-}
-
-.record-waveform-wave {
+.waveform-wavesurfer {
     vertical-align: middle;
     overflow: hidden;
     padding: 0 10px;
 }
 
-.record-waveform-wave .time-total,
-.record-waveform-wave .time-left {
+.waveform-wavesurfer .time-total,
+.waveform-wavesurfer .time-left {
     display: block;
     float: left;
     vertical-align: middle;
     margin: 0 10px;
     font-size: 13px;
     width: 40px;
-    padding: 5px 0;
+    padding: 15px 0;
 }
 
-.record-waveform-wave .time-left {
+.waveform-wavesurfer .time-left {
     float: right;
 }
 
-.record-waveform-wave .audio {
+.waveform-wavesurfer .audio {
     vertical-align: middle;
     height: 30px;
     overflow: hidden;
 }
 
-.record-waveform-volume {
+.waveform-volume {
     position: relative;
     width: 30px;
     text-align: center;
     float: right;
-    padding: 5px 0;
+    padding: 15px 0;
 }
 
-.record-waveform-volume .volume-control {
+.waveform-volume .volume-control {
     border-radius: 3px;
-    background-color: #5d585e;
+    background-color: #ccc;
     padding: 10px;
     position: absolute;
     z-index: 5;
@@ -87,16 +73,16 @@
     margin-left: -13px;
 }
 
-.record-waveform-volume.active {
+.volume-control.active {
     display: block;
 }
 
-.record-waveform-volume:after {
+.volume-control:after {
     width: 0;
     height: 0;
     border-style: solid;
     border-width: 6px 5px 0 5px;
-    border-color: #5d585e transparent transparent transparent;
+    border-color: #ccc transparent transparent transparent;
     position: absolute;
     bottom: -6px;
     left: 50%;
@@ -105,7 +91,7 @@
     content: "";
 }
 
-.record-waveform-volume .slider {
+.waveform-volume .slider {
     width: 6px;
     height: 80px;
     border-radius: 2px;
@@ -113,8 +99,8 @@
     position: relative;
 }
 
-.record-waveform-volume .slider-active,
-.record-waveform-volume .ui-slider-range {
+.waveform-volume .slider-active,
+.waveform-volume .ui-slider-range {
     background-color: #899eae;
     position: absolute;
     left: 0;
@@ -122,8 +108,8 @@
     bottom: 0;
 }
 
-.record-waveform-volume .pin,
-.record-waveform-volume .ui-slider-handle {
+.waveform-volume .pin,
+.waveform-volume .ui-slider-handle {
     border-radius: 50%;
     background-color: #fff;
     position: absolute;
