@@ -120,7 +120,6 @@
                     scope.isPlaying = false;
                 };
 
-
                 scope.isWavesurferLoaded = function () {
                     return angular.isDefined(scope.wavesurfer);
                 };
@@ -137,10 +136,10 @@
     hmsFilter.$inject = [];
     function hmsFilter() {
         return function (str) {
-            var secNum = parseInt(str, 10),
-                hours = Math.floor(secNum / 3600),
-                minutes = Math.floor((secNum - (hours * 3600)) / 60),
-                seconds = secNum - (hours * 3600) - (minutes * 60);
+            var duration = parseInt(str, 10),
+                hours = Math.floor(duration / 3600),
+                minutes = Math.floor((duration - (hours * 3600)) / 60),
+                seconds = duration - (hours * 3600) - (minutes * 60);
 
             if (hours < 10) {
                 hours = '0' + hours;
