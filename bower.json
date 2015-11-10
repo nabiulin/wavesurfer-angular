@@ -28,6 +28,8 @@
   "dependencies": {
     "angular": "~1.3.2",
     "angular-ui-slider": "~0.1.3",
-    "wavesurfer.js": "~1.0.6"
+    "wavesurfer.js": "~1.0.6",
+    "jquery": "~2.1.4",
+    "jquery-ui": "~1.11.4"
   }
 }
