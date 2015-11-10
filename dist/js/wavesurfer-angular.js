@@ -16,7 +16,9 @@
             scope: {
                 url: '=',
                 peaks: '=?',
+                autoLoad: '=?',
                 options: '='
+
             },
             templateUrl: '../dist/template/wavesurfer.html',
             link: function (scope, element) {
@@ -43,11 +45,14 @@
                 scope.progress = 0;
                 scope.remaining = 0;
                 scope.defaultWavePosition = options.height / 2;
+                scope.autoLoad = !!scope.autoLoad;
 
                 var ready = function () {
                     length = Math.floor(scope.wavesurfer.getDuration());
 
-                    scope.$emit('wavesurfer:stop');
+                    if (!scope.autoLoad) {
+                        scope.$emit('wavesurfer:stop');
+                    }
 
                     $timeout(function () {
                         scope.remaining = length;
@@ -95,6 +100,10 @@
                     }
                 };
 
+                if (scope.autoLoad) {
+                    scope.load();
+                }
+
                 scope.playPause = function () {
                     scope.isPlaying = !scope.isPlaying;
                     scope.isVolumeActive = false;
@@ -110,6 +119,7 @@
                     scope.wavesurfer.stop();
                     scope.isPlaying = false;
                 };
+
 
                 scope.isWavesurferLoaded = function () {
                     return angular.isDefined(scope.wavesurfer);
@@ -145,7 +155,5 @@
             return hours + ':' + minutes + ':' + seconds;
         };
     }
-
-
 
 }(window.angular, window.WaveSurfer));
