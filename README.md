@@ -1,37 +1,22 @@
 # Wavesurfer Angular
 
-AngularJS directive wrap the [wavesurfer.js](http://www.wavesurfer.fm/) plugin to be more flexible to use in AngularJS apps.
+AngularJS directive wraps the [wavesurfer.js](http://wavesurfer-js.org/) plugin to be more flexible to use in AngularJS apps.<br>
+Forked from [wavesurfer-angular] (https://github.com/karimfikry/wavesurfer-angular) and built without bootstrap dependency.
 
-This alpha release contains some basic functionalities supported in [wavesurfer.js](http://www.wavesurfer.fm/):
-  - **Play/Pause**
-  - **Fast forward/Step backward**
-
-### Installation
-
-You need [bower](http://bower.io/) installed globally:
-
-```sh
-$ npm install -g bower
+#Installation
+```bash
+npm install -g bower
+bower install
 ```
 
-To install wavesurfer-angular directive using [bower](http://bower.io/) use
+# Alpha release.
 
-```sh
-$ bower install wavesurfer-angular
-```
+#### Directive params
 
-### Running the example
-
-Added example shows how to use the directive.
-
-To run the example follow the steps:
-
-You need [npm](https://www.npmjs.org/) installed:
-```sh
-$ cd example
-$ npm install http-server
-$ http-server -p [port_number, 8080 is default]
-```
+* `url` - Audio URL
+* `peaks` - Peak array. In some situations you may need to generate peak array in your application
+* `options` - Additional options could be found on [wavesurfer.js] (https://github.com/katspaugh/wavesurfer.js/blob/master/README.md#wavesurfer-options)
+* `auto-load` - if you want to load audio file automatically - pass true. (false by default)
 
 License
 ----
