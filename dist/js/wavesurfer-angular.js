@@ -3,6 +3,11 @@
 
     var module = angular.module('wavesurfer.angular', ['ui.slider']);
 
+    module
+        .directive('wavesurfer', wavesurferDirective)
+        .filter('hms', hmsFilter);
+
+    wavesurferDirective.$inject = ['$rootScope', '$timeout'];
     function wavesurferDirective($rootScope, $timeout) {
         var uuid = 1;
 
@@ -37,11 +42,12 @@
                 scope.uniqueId = 'waveform_' + (uuid++);
                 scope.progress = 0;
                 scope.remaining = 0;
+                scope.defaultWavePosition = options.height / 2;
 
                 var ready = function () {
                     length = Math.floor(scope.wavesurfer.getDuration());
 
-                    scope.$emit('wavesurfer:stopAll');
+                    scope.$emit('wavesurfer:stop');
 
                     $timeout(function () {
                         scope.remaining = length;
@@ -83,7 +89,7 @@
                         init(scope.peaks);
                     } else {
                         if (!scope.wavesurfer.isPlaying()) {
-                            scope.$emit('wavesurfer:stopAll');
+                            scope.$emit('wavesurfer:stop');
                         }
                         scope.playPause();
                     }
@@ -105,8 +111,12 @@
                     scope.isPlaying = false;
                 };
 
-                $rootScope.$on('wavesurfer:stopAll', function () {
-                    if (angular.isDefined(scope.wavesurfer)) {
+                scope.isWavesurferLoaded = function () {
+                    return angular.isDefined(scope.wavesurfer);
+                };
+
+                $rootScope.$on('wavesurfer:stop', function () {
+                    if (angular.isDefined(scope.wavesurfer) && scope.wavesurfer.isPlaying()) {
                         scope.stop();
                     }
                 });
@@ -114,6 +124,7 @@
         };
     }
 
+    hmsFilter.$inject = [];
     function hmsFilter() {
         return function (str) {
             var secNum = parseInt(str, 10),
@@ -131,12 +142,10 @@
                 seconds = '0' + seconds;
             }
 
-            return minutes + ':' + seconds;
+            return hours + ':' + minutes + ':' + seconds;
         };
     }
 
-    module
-        .directive('wavesurfer', wavesurferDirective)
-        .filter('hms', hmsFilter);
+
 
 }(window.angular, window.WaveSurfer));

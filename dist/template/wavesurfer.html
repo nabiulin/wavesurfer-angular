@@ -17,6 +17,8 @@
     <div class="waveform-wavesurfer">
         <div class="time-total">{{progress | hms}}</div>
         <div class="time-left">-{{remaining | hms}}</div>
-        <div class="audio"></div>
+        <div class="audio">
+            <div class="default-wave" ng-show="!isWavesurferLoaded()" ng-style="{'margin-top': defaultWavePosition}"></div>
+        </div>
     </div>
 </div>

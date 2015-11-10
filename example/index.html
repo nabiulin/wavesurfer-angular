@@ -27,6 +27,7 @@
             }
             .waveform-wrapper {
                 margin-top: 20px;
+                padding: 15px;
             }
             .page-wrapper {
                 margin-top: 150px;
@@ -34,18 +35,12 @@
         </style>
     </head>
     <body>
-        <div ng-controller="wavesurferController" class="page-wrapper">
-            <div class="waveform-wrapper">
-                <wavesurfer url="url" options="options"></wavesurfer>
-            </div>
-            <div class="waveform-wrapper">
-                <wavesurfer url="url" options="options"></wavesurfer>
-            </div>
-            <div class="waveform-wrapper">
-                <wavesurfer url="url" options="options"></wavesurfer>
-            </div>
-            <div class="waveform-wrapper">
-                <wavesurfer url="url" options="options"></wavesurfer>
+        <div ng-controller="wavesurferCtrl" class="page-wrapper">
+            <div ng-repeat="file in files">
+                <div class="waveform-wrapper">
+                    <span>{{file.name}}</span>
+                    <wavesurfer url="file.url" options="options"></wavesurfer>
+                </div>
             </div>
         </div>
     </body>
