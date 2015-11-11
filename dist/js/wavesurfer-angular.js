@@ -151,10 +151,16 @@
                     scope.isPlaying = false;
                 };
 
+                /**
+                 * Forward
+                 */
                 scope.forward = function () {
                     wavesurfer.skipForward();
                 };
 
+                /**
+                 * Backward
+                 */
                 scope.backward = function () {
                   wavesurfer.backward();
                 };
