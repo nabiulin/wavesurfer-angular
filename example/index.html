@@ -32,16 +32,63 @@
             .page-wrapper {
                 margin-top: 100px;
             }
+            .multi-form {
+                border: 1px solid #cacaca;
+                border-radius: 5px;
+            }
+            .multi-form .title {
+                margin: 10px;
+                font-weight: bold;
+            }
         </style>
     </head>
     <body>
         <div ng-controller="wavesurferCtrl" class="page-wrapper">
-            <div ng-repeat="file in files">
-                <div class="waveform-wrapper">
+            <div class="waveform-wrapper">
+                <div>{{file.name}} - auto load audio record [<i><b>auto-load="true"</b></i>]</div>
+                <wavesurfer url="file.url" auto-load="true"></wavesurfer>
+            </div>
+            <div class="waveform-wrapper">
+                <span>{{file.name}} - custom template [<i><b>template="..."</b></i>]</span>
+                <wavesurfer url="file.url" template="custom-template.tpl.html"></wavesurfer>
+            </div>
+            <div class="multi-form">
+                <div class="title">Multi form</div>
+                <div class="waveform-wrapper" ng-repeat="file in multiForm">
                     <span>{{file.name}}</span>
                     <wavesurfer url="file.url" options="options"></wavesurfer>
                 </div>
             </div>
         </div>
+
+        <script type="text/ng-template" id="custom-template.tpl.html">
+            <div class="waveform" id="{{::uniqueId}}" style="border: 1px solid #f00;">
+                <div class="waveform-control">
+                    <span ng-click="load()">
+                        <i class="fa"
+                           ng-class="{'fa-spinner fa-spin': isLoading, 'fa-play' : !isPlaying, 'fa-pause': isPlaying}"></i>
+                    </span>
+                </div>
+                <div class="waveform-volume">
+                    <i class="fa fa-volume-up" ng-click="isVolumeActive = !isVolumeActive"></i>
+                    <div class="volume-control" ng-class="{active: isVolumeActive}">
+                        <div ui-slider="{orientation: 'vertical', range: 'min'}" class="slider"
+                             min="0"
+                             max="100"
+                             step="1"
+                             ng-model="volume">
+                        </div>
+                    </div>
+                </div>
+                <div class="waveform-wavesurfer">
+                    <div class="time-total">{{progress | hms}}</div>
+                    <div class="time-left">-{{remaining | hms}}</div>
+                    <div class="audio">
+                        <div class="default-wave" ng-show="!isWavesurferLoaded()"
+                             ng-style="{'margin-top': defaultWavePosition}"></div>
+                    </div>
+                </div>
+            </div>
+        </script>
     </body>
 </html>

@@ -7,8 +7,8 @@
         .directive('wavesurfer', wavesurferDirective)
         .filter('hms', hmsFilter);
 
-    wavesurferDirective.$inject = ['$rootScope', '$timeout'];
-    function wavesurferDirective($rootScope, $timeout) {
+    wavesurferDirective.$inject = ['$rootScope', '$timeout', '$templateCache', '$http', '$compile'];
+    function wavesurferDirective($rootScope, $timeout, $templateCache, $http, $compile) {
         var uuid = 1;
 
         return {
@@ -17,7 +17,8 @@
                 url: '=',
                 peaks: '=?',
                 autoLoad: '=?',
-                options: '='
+                options: '=',
+                customTemplateUrl: '@template'
 
             },
             templateUrl: '../dist/template/wavesurfer.html',
@@ -173,9 +174,15 @@
                     return angular.isDefined(wavesurfer);
                 };
 
+                var customTemplate = scope.customTemplateUrl;
+                if (customTemplate) {
+                    element.html($templateCache.get(customTemplate));
+                    $compile(element.contents())(scope);
+                }
+
                 /**
                  * Subscribe on wavesurfer:stop event
-                 * and stop another wavesurfer
+                 * and stop other wavesurfers
                  */
                 $rootScope.$on('wavesurfer:stop', function () {
                     if (angular.isDefined(wavesurfer) && wavesurfer.isPlaying()) {

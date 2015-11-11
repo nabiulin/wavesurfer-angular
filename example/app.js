@@ -13,11 +13,12 @@
             cursorColor: '#2A9FD6'
         };
 
-        $scope.files = [
-            {
-                name: 'Form #1',
-                url: './example.mp3'
-            },
+        $scope.file = {
+            name: 'Form #1',
+            url: './example.mp3'
+        };
+
+        $scope.multiForm = [
             {
                 name: 'Form #2',
                 url: './example.mp3'
